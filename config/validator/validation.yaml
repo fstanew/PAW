@@ -1,0 +1,70 @@
+App\Entity\Location:
+    properties:
+        city:
+            - NotBlank:
+                message: 'Podaj nazwe miasta.'
+                groups: [new, edit]
+            - Length:
+                min: 2
+                max: 255
+                minMessage: 'Nazwa miasta jest za krotka.'
+                groups: [new]
+            - Length:
+                min: 1
+                max: 255
+                groups: [edit]
+        country:
+            - NotBlank:
+                message: 'Wybierz kraj.'
+                groups: [new, edit]
+            - Length:
+                exactly: 2
+                exactMessage: 'Kod kraju musi miec 2 znaki.'
+                groups: [new, edit]
+        latitude:
+            - NotBlank:
+                message: 'Podaj szerokosc geograficzna.'
+                groups: [new]
+            - Range:
+                min: -90
+                max: 90
+                notInRangeMessage: 'Szerokosc musi byc od -90 do 90.'
+                groups: [new, edit]
+        longitude:
+            - NotBlank:
+                message: 'Podaj dlugosc geograficzna.'
+                groups: [new]
+            - Range:
+                min: -180
+                max: 180
+                notInRangeMessage: 'Dlugosc musi byc od -180 do 180.'
+                groups: [new, edit]
+
+App\Entity\Measurement:
+    properties:
+        location:
+            - NotBlank:
+                message: 'Wybierz lokalizacje.'
+                groups: [new, edit]
+        date:
+            - NotBlank:
+                message: 'Podaj date.'
+                groups: [new, edit]
+            - GreaterThan:
+                value: 'today'
+                message: 'Data musi byc w przyszlosci.'
+                groups: [new]
+        celsius:
+            - NotBlank:
+                message: 'Podaj temperature.'
+                groups: [new, edit]
+            - Range:
+                min: -60
+                max: 60
+                notInRangeMessage: 'Temperatura musi byc od -60 do 60.'
+                groups: [new]
+            - Range:
+                min: -80
+                max: 80
+                notInRangeMessage: 'Temperatura musi byc od -80 do 80.'
+                groups: [edit]
